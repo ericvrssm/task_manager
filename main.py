@@ -1,20 +1,36 @@
 import json
 
-def add_name(name):
-    # Read existing data (if any)
+
+def add_task(title, status):
     try:
         with open('data.json', 'r') as f:
             data = json.load(f)
     except FileNotFoundError:
-        data = []  # Initialize as empty list if file doesn't exist
+        data = []
+
+    id = len(data)+1
+    task = {
+            'title': f'{title}',
+            'id': f'{id}',
+            'status': f'{status}'
+        }
     
-    # Update the data
-    data.append(name)  # Add new name to the list
-    
-    # Write updated data back to the file
+    process = []
+    process.append(task)
+    data.append(process)
+
     with open('data.json', 'w') as f:
-        json.dump(data, f, indent=4)  # Use indent for readability
+        json.dump(data, f, indent=4)
 
 
-add_name('eric')
-add_name('emanoelly')
+def list_task():
+    with open('data.json', 'r') as f:
+        data = json.load(f)
+        list = data.items()
+    return print(list)
+
+
+
+add_task("fazer o almoço", "fazendo")
+
+
