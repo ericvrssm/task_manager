@@ -5,11 +5,11 @@ import argparse
 
 parser = argparse.ArgumentParser(description='Task manager for CLI')
 
-
 #general commands
+parser.add_argument("-a", "--addtask", action="store_true", help="add a task to the database")
 parser.add_argument("-t", "--title")
 parser.add_argument("-s","--state")
-parser.add_argument('-l', '--list')
+parser.add_argument('-l', '--list', action="store_true", help="list all the tasks by id and their status")
 
 
 def liste():
@@ -27,6 +27,10 @@ def add_task(title, status):
     try:
         with open('data.json', 'r') as f:
             data = json.load(f)
+    except json.JSONDecodeError:
+        with open('data.json', 'w') as f:
+            data = []
+            json.dump(data , f)
     except FileNotFoundError:
         data = []
 
@@ -47,5 +51,7 @@ def add_task(title, status):
 
 args = parser.parse_args()
 if __name__ == '__main__':
-    add_task(args.title, args.state)
-    liste(args.list)
+    if args.addtask == True:
+        add_task(args.title, args.state)
+    if args.list == True:
+        liste()
