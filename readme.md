@@ -1,8 +1,7 @@
-#Task manager project
-WIP
+# Task manager project
+## WIP
 
-- Terminal based
-- add/remove task
-- date
-- mark as done/undone
-- remove task
+1. [x] Terminal based
+2. [x] add/remove task
+4. [] mark as done/undone
+5. [] remove task
